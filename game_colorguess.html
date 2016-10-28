@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Hassan">
+        <meta name="description" content="Color Guessing Game Assignment">
+                 <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            var color = new Array("black","gray","silver","white","yellow","lime"); //6 colors
+            var finished = false, count = 0, guess, random, target;
+            color.sort();
+            function do_game(){
+                random = Math.floor(Math.random() * 6); 
+                target = color[random];
+                while (!finished){
+                    guess = prompt("I am thinking of one of these colors: \n\n" + color.toString() + "\n\n What color am I thinking of?" ) ;
+                    count++;
+                    finished = check_guess();
+                }
+            }
+            function check_guess(){
+                 if (guess===target){
+                        document.body.style.backgroundColor = color[random];
+                        setTimeout(function(){alert("Congratulations! You have guessed the color! \n\n It took you " + count + " guesses to finish the game! \n\n You can see the color in the background.")}, 1);
+                        return true;
+                    }
+                    var unknownColor = (color.indexOf(guess) > -1);
+                    if (!unknownColor){
+                        alert ("Sorry, I don't recognize your color.\n\n Please try again.");
+                        return false;
+                    }
+                    if (guess > target){
+                        alert("Sorry, your guess is not correct! \n\n Hint: your color is alphabetically higher than mine. \n\n Please try again.");
+                        return false;
+                    }
+                    if (guess < target){
+                        alert("Sorry, your guess is not correct! \n\n Hint: your color is alphabetically lower than mine. \n\n Please try again.");
+                        return false;
+                    }
+                
+            }
+            
+         </script>
+    </head>
+    <body  onload="do_game()">
+            <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home.html">HsnSd</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="home.html">Home</a></li>
+    
+    </ul>
+  </div>
+</nav>
+    </body>
+</html>

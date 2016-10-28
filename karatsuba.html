@@ -1,0 +1,116 @@
+<!-- #######  YAY, I AM THE SOURCE EDITOR! #########-->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    pre {
+    white-space: pre-wrap;
+    background: hsl(30,80%,90%);
+}
+    </style></head>
+<body>
+            <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="home.html">HsnSd</a>
+            </div>
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="home.html">Home</a></li>
+
+            </ul>
+          </div>
+        </nav>
+<h1 id="firstHeading" class="firstHeading" lang="en">Karatsuba algorithm</h1> <p align = "right"> <font size= "1"><a href="game_colorguess.html">Source: Wikipedia</a> <br> </font></p>
+<p>The <strong>Karatsuba algorithm</strong> is a fast multiplication algorithm. It was discovered by Anatoly Karatsuba in 1960 and published in 1962.&nbsp;It reduces the multiplication of two <em>n</em>-digit numbers to at most <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6da16366b6718b3e8fe40d5d08c8c06ea107c6b9" alt="n^{\log _{2}3}\approx n^{1.585}" /> single-digit multiplications in general (and exactly <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/d2c68b25865416586c8f26e4e53c126820e05e6f" alt="n^{\log _{2}3}" /> when <em>n</em> is a power of 2). It is therefore faster than the classical algorithm, which requires <em>n</em><sup>2</sup> single-digit products. For example, the Karatsuba algorithm requires 3<sup>10</sup> = 59,049 single-digit multiplications to multiply two 1024-digit numbers (<em>n</em> = 1024 = 2<sup>10</sup>), whereas the classical algorithm requires (2<sup>10</sup>)<sup>2</sup> = 1,048,576.</p>
+<p>&nbsp;</p>
+    <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">Click here to read more about it!</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Hide]</a><br><h2><span id="Algorithm" class="mw-headline">Algorithm</span></h2>
+<h3><span id="Basic_step" class="mw-headline">Basic step</span></h3>
+<p>The basic step of Karatsuba's algorithm is a formula that allows one to compute the product of two large numbers <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/87f9e315fd7e2ba406057a97300593c4802b53e4" alt="x" /> and <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b8a6208ec717213d4317e666f1ae872e00620a0d" alt="y" /> using three multiplications of smaller numbers, each with about half as many digits as <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/87f9e315fd7e2ba406057a97300593c4802b53e4" alt="x" /> or <span class="mwe-math-mathml-inline mwe-math-mathml-a11y"><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b8a6208ec717213d4317e666f1ae872e00620a0d" alt="y" />,</span>&nbsp;plus some additions and digit shifts.</p>
+<p>Let <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/87f9e315fd7e2ba406057a97300593c4802b53e4" alt="x" /> and <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/b8a6208ec717213d4317e666f1ae872e00620a0d" alt="y" /> be represented as <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n" />-digit strings in some base <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/47136aad860d145f75f3eed3022df827cee94d7a" alt="B" />. For any positive integer <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/0a07d98bb302f3856cbabc47b2b9016692e3f7bc" alt="m" /> less than <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/a601995d55609f2d9f5e233e36fbe9ea26011b3b" alt="n" />, one can write the two given numbers as</p>
+<p><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9817290293c152f22412430dd8626fcb6dfb3794" alt="x=x_{1}B^{m}+x_{0}" /><br /><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/ecfd78597815b200536c6f8ff9d609a78427e2fb" alt="y=y_{1}B^{m}+y_{0}" />,</p>
+<p>where <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/86f21d0e31751534cd6584264ecf864a6aa792cf" alt="x_{0}" /> and&nbsp;<img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/6d943dbbb0b56ca750c4d62c5b54b4ae29a773da" alt="y_{0}" /> are less than <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/373e4ac701258dd693c81290941e604d93a28fd9" alt="B^{m}" />. The product is then</p>
+<p><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e4251585f93a152c3f0b4695c22a004fb8a6e541" alt="xy=(x_{1}B^{m}+x_{0})(y_{1}B^{m}+y_{0})" /><br /><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/e2e49cd39851a7745cf274813c030e4c927feca3" alt="xy=z_{2}B^{2m}+z_{1}B^{m}+z_{0}" />,</p>
+<p>where</p>
+<p><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/66fc46bf2e2477ae59eff70af058155e60c44406" alt="z_{2}=x_{1}y_{1}" /><br /><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/37e7767de020a7091762d24e3f002eed0a013b2b" alt="z_{1}=x_{1}y_{0}+x_{0}y_{1}" /><br /><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9027e9ee761af695b64aa99dcc926f0890f91d59" alt="z_{0}=x_{0}y_{0}" />.</p>
+<p>These formulae require four multiplications, and were known to Charles Babbage.&nbsp;Karatsuba observed that&nbsp;<img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/c72eb345e496513fb8b2fa4aa8c4d89b855f9a01" alt="xy" /> can be computed in only three multiplications, at the cost of a few extra additions. With <img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9e72d1d86e86355892b39b8eb32b964834e113bf" alt="z_{0}" /> and&nbsp;<img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/5abf655fa14f7ea44ad0ca781b59ff59c5f49117" alt="z_{2}" /> as before one can calculate</p>
+<p><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/24ed20957ef79aa4b422512175f6e54c2b7566cf" alt="z_{1}=(x_{1}+x_{0})(y_{1}+y_{0})-z_{2}-z_{0}" /></p>
+<p>which holds since</p>
+<p><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/37e7767de020a7091762d24e3f002eed0a013b2b" alt="z_{1}=x_{1}y_{0}+x_{0}y_{1}" /><br /><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/359ca7cfd6418a472938129b2ad21f0b41f5a191" alt="z_{1}=(x_{1}+x_{0})(y_{1}+y_{0})-x_{1}y_{1}-x_{0}y_{0}" />.</p>
+<p>A more efficient implementation of Karatsuba multiplication can be set as<img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/f49905a3361ae48678fd69949a63ec46401fbac8" alt="xy=(b^{2}+b)x_{1}y_{1}-b(x_{1}-x_{0})(y_{1}-y_{0})+(b+1)x_{0}y_{0}" />, where <span class="mwe-math-mathml-inline mwe-math-mathml-a11y">{</span><img class="mwe-math-fallback-image-inline" src="https://wikimedia.org/api/rest_v1/media/math/render/svg/92558eb10e8fc6c7bb2dec158329d9e0db880332" alt="b=B^{m}" />.</p>
+<h3><span id="Example" class="mw-headline">Example</span></h3>
+<p>To compute the product of 12345 and 6789, choose <em>B</em> = 10 and <em>m</em> = 3. Then we decompose the input operands using the resulting base (<em>B</em><sup><em>m</em></sup> = <em>1000</em>), as:</p>
+<dl>
+<dd>12345 = <strong>12</strong> &middot; <em>1000</em> + <strong>345</strong></dd>
+<dd>6789 = <strong>6</strong> &middot; <em>1000</em> + <strong>789</strong></dd>
+</dl>
+<p>Only three multiplications, which operate on smaller integers, are used to compute three partial results:</p>
+<dl>
+<dd><em>z</em><sub>2</sub> = <strong>12</strong> <strong>&times;</strong> <strong>6</strong> = 72</dd>
+<dd><em>z</em><sub>0</sub> = <strong>345</strong> <strong>&times;</strong> <strong>789</strong> = 272205</dd>
+<dd><em>z</em><sub>1</sub> = (<strong>12</strong> + <strong>345</strong>) <strong>&times;</strong> (<strong>6</strong> + <strong>789</strong>) &minus; <em>z</em><sub>2</sub> &minus; <em>z</em><sub>0</sub> = 357 <strong>&times;</strong> 795 &minus; 72 &minus; 272205 = 283815 &minus; 72 &minus; 272205 = 11538</dd>
+</dl>
+<p>We get the result by just adding these three partial results, shifted accordingly (and then taking carries into account by decomposing these three inputs in base <em>1000</em> like for the input operands):</p>
+<dl>
+<dd>result = <em>z</em><sub>2</sub> &middot; <em>B</em><sup>2<em>m</em></sup> + <em>z</em><sub>1</sub> &middot; <em>B</em><sup><em>m</em></sup> + <em>z</em><sub>0</sub>, i.e.</dd>
+<dd>result = 72 &middot; <em>1000</em><sup>2</sup> + 11538 &middot; <em>1000</em> + 272205 = <strong>83810205</strong>.</dd>
+</dl>
+<p>Note that the intermediate third multiplication operates on an input domain which is less than two times larger than for the two first multiplications, its output domain is less than four times larger, and base-<em>1000</em> carries computed from the first two multiplications must be taken into account when computing these two subtractions; but note also that this partial result <em>z</em><sub>1</sub> cannot be negative: to compute these subtractions, equivalent additions using complements to <em>1000</em><sup>2</sup> can also be used, keeping only the two least significant base-<em>1000</em> digits for each number:</p>
+<dl>
+<dd><em>z</em><sub>1</sub> = 283815 &minus; 72 &minus; 272205 = (283815 + 999928 + 727795) <strong>mod</strong> <em>1000</em><sup>2</sup> = 2011538 <strong>mod</strong> <em>1000</em><sup>2</sup> = 11538.</dd>
+</dl></span>
+
+<h2>Here is the java code I wrote for Karatsuba Multiplication:</h2>
+<pre>
+package karatsuba;
+import java.util.*;
+import java.math.*;
+/**
+ *
+ * @author Hassan
+ */
+public class Karatsuba {
+    static BigInteger Ten = new BigInteger("10");
+    static BigInteger Two = new BigInteger("2");
+    static BigInteger One = new BigInteger("1");
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        BigInteger a = new BigInteger("2718281828459045235360287471352662497757247093699959574966967627");
+        BigInteger b = new BigInteger("3141592653589793238462643383279502884197169399375105820974944592");
+        System.out.println(karatsuba3(a,b));
+        }
+    
+    public static BigInteger karatsuba3(BigInteger i, BigInteger j){
+        if (i.compareTo(Ten) == -1 || j.compareTo(Ten) == -1)
+            return i.multiply(j);
+        String length = getLength(i.max(j));
+        BigInteger n = new BigInteger(length);
+        if (n.mod(Two).equals(One))
+            n = n.add(One);
+        
+        BigInteger a = i.divide(Ten.pow(n.divide(Two).intValue()));
+        BigInteger b = i.mod(Ten.pow(n.divide(Two).intValue()));
+        BigInteger c = j.divide(Ten.pow(n.divide(Two).intValue()));
+        BigInteger d = j.mod(Ten.pow(n.divide(Two).intValue()));
+        
+        BigInteger first = karatsuba3(a,c);
+        BigInteger second = karatsuba3(b,d);
+        BigInteger third = karatsuba3(a.add(b),c.add(d));
+        
+        return ((first.multiply(Ten.pow(n.intValue()))).add ((((third.subtract(first)).subtract( second))).multiply(Ten.pow(n.divide((new BigInteger("2"))).intValue()))).add(second));
+    }
+    
+    public static String getLength( BigInteger a){
+        String b = a.toString();
+        return Integer.toString(b.length());
+    }
+    
+
+}
+</pre>
+</body>
+<p>&nbsp;</p>

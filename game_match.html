@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name = "author" content = "Hassan">
+        <meta name = "description" content = "Matching Game Assessment">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Matching Game</title>
+      
+        <style>
+            div {position: absolute; width: 500px; height: 500px}
+            #rightSide { top: 0; bottom: 0; right: 0; margin: auto; left: 500px; border-left: 1px solid black}
+            img {position: absolute}
+        </style>
+    </head>
+    <body  onload = "generateFaces()">   
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="home.html">HsnSd</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="home.html">Home</a></li>
+     
+    </ul>
+  </div>
+</nav>
+        <h1><b><font size= "6">Matching Game</font></b></h1>
+        <p>Click on the extra smiling face on the left</p>
+        
+        <div id = "leftSide"></div> 
+        <div id = "rightSide"></div> 
+
+    </body>
+              <script>
+            var numberOfFaces = 5;
+            var theBody = document.getElementsByTagName("body")[0];
+            var theLeftSide = document.getElementById("leftSide");
+            var theRightSide = document.getElementById("rightSide");
+            function generateFaces(){
+                for (i = 0; i < numberOfFaces; i++){
+                    var this_img = document.createElement("IMG");
+                    this_img.src= "http://home.cse.ust.hk/~rossiter/mooc/matching_game/smile.png";
+                    this_img.style.top = Math.floor(Math.random() * 401) + "px";
+                    this_img.style.left = Math.floor(Math.random() * 401) + "px";
+                    theLeftSide.appendChild(this_img);
+                }
+                leftSideImages = theLeftSide.cloneNode(true);
+                leftSideImages.removeChild(leftSideImages.lastChild);
+                theRightSide.appendChild(leftSideImages);
+                theLeftSide.lastChild.onclick = function nextLevel(event){ 
+                    event.stopPropagation(); 
+                    while (theLeftSide.firstChild)
+                        theLeftSide.removeChild(theLeftSide.firstChild);
+                    while (theRightSide.firstChild)
+                        theRightSide.removeChild(theRightSide.firstChild);
+                    numberOfFaces += 5; 
+                    generateFaces();
+                };
+            }
+            theBody.onclick = function gameOver() { 
+                alert("Game Over!"); 
+                theBody.onclick= null; 
+                theLeftSide.lastChild.onclick= null; 
+            }; 
+        </script>
+</html>
