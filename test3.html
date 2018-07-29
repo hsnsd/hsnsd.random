@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="test3.css">
+
+
+<div class="container">
+        <table id="myTable">
+          <tr id="initialRow" class="select_row">
+            <td>  
+                <select class="select1">
+                <option>Select an option</option>
+                <option>yes</option>
+                <option>no</option>
+              </select>
+              <select class="select2"></select>
+            </td>
+          </tr>
+        </table>
+        <button class="button" type="button" onClick="addRow()">Add</button>
+        <button class="button" type="button" onClick="getValues()">Print values</button>
+      </div>
+      
+      <script>
+        const table = document.getElementById('myTable');
+          const initialRow = document.getElementById('initialRow');
+        const rowToDuplicate = initialRow.cloneNode(true);
+      
+        function addRow() {
+          let duplicate = rowToDuplicate.cloneNode(true);	
+            let select1 = duplicate.lastElementChild.firstElementChild
+              let select2 = duplicate.lastElementChild.lastElementChild		
+          table.appendChild(duplicate);
+              initSelects(select1, select2);
+        }
+      
+        function getValues() {
+          const rows = document.querySelectorAll('.select_row');
+          rows.forEach((row, i) => {
+            console.log(`row ${i}: select1 `, row.querySelector('.select1').value);
+            console.log(`row ${i}: select2 `, row.querySelector('.select2').value);
+          })
+        }
+          
+          function initSelects(a, b) {
+              var bOptions = {
+            "yes": ["sweet", "wohoo", "yay"],
+            "no": ["you suck!", "common son"]
+          };
+      
+              a.onchange = function () {
+                  //clear out B
+                  b.length = 0;
+                  //get the selected value from A
+                  var _val = this.options[this.selectedIndex].value;
+                  //loop through bOption at the selected value
+                  for (var i in bOptions[_val]) {
+                      //create option tag
+                      var op = document.createElement('option');
+                      //set its value
+                      op.value = bOptions[_val][i];
+                      //set the display label
+                      op.text = bOptions[_val][i];
+                      //append it to B
+                      b.appendChild(op);
+                      }
+              }
+          }
+          
+          initSelects(
+              initialRow.lastElementChild.firstElementChild, 
+              initialRow.lastElementChild.lastElementChild
+          );
+      </script>
